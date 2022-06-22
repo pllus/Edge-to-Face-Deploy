@@ -51,7 +51,7 @@ realtime_update = (True)
 #st.sidebar.checkbox("Update in realtime", True)
 #Generate = st.button("generate")
 option = st.sidebar.radio('', ['Use a Predrawn Edge', 'Use your own Edge'])
-valid_images = glob.glob('gans deploy\Predrawnedge\*.jpg')
+valid_images = glob.glob('Predrawnedge/*.jpg')
 
 if option == 'Use a Predrawn Edge':
     st.sidebar.write('### Use a Predrawn Edge')
@@ -110,9 +110,9 @@ torch.backends.cudnn.benchmark = True
 class config(): #for configing images and getting model path
   DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
   #LEARNING_RATE = 2e-4
-  VAL_DIR = "D:\gans deploy\Input"
+  VAL_DIR = "Input"
   LOAD_MODEL = True
-  CHECKPOINT_GEN = "D:\gans deploy\gen.pth.tar" 
+  CHECKPOINT_GEN = "gen.pth.tar" 
   
   both_transform = A.Compose(
     [A.Resize(width=256, height=256),], additional_targets={"image0": "image"},
@@ -272,10 +272,10 @@ def save_some_examples(gen, val_loader, folder):
 
 if Generate == True:
     final_input = np.hstack((resized,ground_image))
-    cv2.imwrite("D:\gans deploy\Input\ "+str("finalinout")+".jpg",final_input)
+    cv2.imwrite("Input\"+str("finalinout")+".jpg",final_input)
     val_dataset = FaceDataset(root_dir=config.VAL_DIR)
     val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False)
 
-    save_some_examples(gen, val_loader,folder="D:\gans deploy\Output")
-    imageout = Image.open('D:\gans deploy\Output\y_gen.png')
+    save_some_examples(gen, val_loader,folder="Output")
+    imageout = Image.open('Output\y_gen.png')
     st.image(imageout, caption='Behold you Masterpiece or nightmare Idk')
