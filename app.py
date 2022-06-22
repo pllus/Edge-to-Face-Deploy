@@ -272,7 +272,7 @@ def save_some_examples(gen, val_loader, folder):
 
 if Generate == True:
     final_input = np.hstack((resized,ground_image))
-    cv2.imwrite("Input\"+str("finalinout")+".jpg",final_input)
+    cv2.imwrite("Input\"+str ("finalinout")+".jpg",final_input)
     val_dataset = FaceDataset(root_dir=config.VAL_DIR)
     val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False)
 
